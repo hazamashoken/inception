@@ -10,6 +10,8 @@ RUN apt-get update && \
 
 COPY ./tools/create_mariadb.sh /usr/local/bin/
 
+RUN chmod +x /usr/local/bin/create_mariadb.sh
+
 EXPOSE 3306
 
 ENTRYPOINT ["/usr/local/bin/create_mariadb.sh", ";", "mysqld", "-u", "mysql"]
