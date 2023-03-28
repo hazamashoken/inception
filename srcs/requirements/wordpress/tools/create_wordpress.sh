@@ -1,6 +1,6 @@
 #!/bin/bash
 echo Checking if wordpress ins installed
-if [ -f "index.php" ]
+if [ -f "/var/www/html/index.php" ]
 	exit 0
 fi
 
@@ -22,4 +22,16 @@ wp config create --dbname=$MY_SQL_DATABASE \
 	--force
 
 
-wp core install
+wp core install --url=$DOMAIN_NAME \
+	--admin_user=$MYSQL_USER \
+	--admin_email=$MYSQL_EMAIL \
+	--admin_password=$MYSQL_PASSWORD \
+	--title="Whatever"
+
+wp user create $WP_USER $WP_EMAIL --role=editor
+
+wp theme install twentynineteen --activate
+
+wp redis enable
+
+chown nginx:nginx /var/www/html

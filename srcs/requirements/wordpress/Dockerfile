@@ -11,6 +11,9 @@ RUN apt-get update && \
 	php-fpm \
 	php-mysql \
 	wp-cli \
+	redis-server \
+	php-redis \
+	mariadb-client \
 	&& rm -rf /var/lib/apt/lists/*
 
 
@@ -31,8 +34,3 @@ ENTRYPOINT ["/usr/local/bin/create_wordpress.sh"]
 EXPOSE 9000
 
 CMD ["/usr/sbin/php-fpm7.3", "-F"]
-
-
-	
-
-
