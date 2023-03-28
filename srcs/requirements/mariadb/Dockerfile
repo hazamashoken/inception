@@ -14,4 +14,4 @@ EXPOSE 3306
 
 CMD ["/usr/local/bin/create_mariadb.sh"]
 
-ENTRYPOINT ["mariadbd", "-u", "root"]
+ENTRYPOINT ["mysqld", "-u", "mysql"]
