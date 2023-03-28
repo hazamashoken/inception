@@ -12,6 +12,4 @@ COPY ./tools/create_mariadb.sh /usr/local/bin/
 
 EXPOSE 3306
 
-CMD ["/usr/local/bin/create_mariadb.sh"]
-
-ENTRYPOINT ["mysqld", "-u", "mysql"]
+ENTRYPOINT ["/usr/local/bin/create_mariadb.sh", ";", "mysqld", "-u", "mysql"]
