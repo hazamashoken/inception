@@ -13,7 +13,7 @@ do
 	mariadb -u root -e "SELECT version();" > /dev/null 2>&1
 done
 
-wp core download --path=`/var/www/html`
+wp core download --path=/var/www/html
 
 wp config create --dbname=$MY_SQL_DATABASE \
 	--dbuser=$MYSQL_USER \
