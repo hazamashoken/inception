@@ -22,8 +22,8 @@ COPY ./tools/create_wordpress.sh /usr/local/bin/
 
 RUN curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar \
 	&& chmod +x wp-cli.phar \
-	&& mv wp-cli.phar /usr/local/bin/wp && \
-	chmod +X /usr/local/bin/create_wordpress.sh
+	&& mv wp-cli.phar /usr/local/bin/wp
+RUN chmod +X /usr/local/bin/create_wordpress.sh
 
 EXPOSE 9000
 
