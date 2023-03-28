@@ -10,8 +10,7 @@ RUN apt-get update && \
 	unzip \
 	php-fpm \
 	php-mysql \
-	wp-cli \
-	redis-server \
+	redis \
 	php-redis \
 	mariadb-client \
 	&& rm -rf /var/lib/apt/lists/*
@@ -21,16 +20,15 @@ WORKDIR /var/www/html
 
 COPY ./tools/create_wordpress.sh /usr/local/bin/
 
-RUN wget https://wordpress.org/latest.tar.gz && \
-	tar -zxf lastest.tar.gz && \
-	rm latest.tar.gz && \
-	chown -R www.data:www-data /var/www/inception && \
+RUN curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar \
+	&& chmod +x wp-cli.phar \
+	&& mv wp-cli.phar /usr/local/bin/wp && \
 	chmod +X /usr/local/bin/create_wordpress.sh
 
 COPY ./conf/www.conf /etc/php/7.3/fpm/pool.d
 
-ENTRYPOINT ["/usr/local/bin/create_wordpress.sh"]
+CMD ["/usr/local/bin/create_wordpress.sh"]
 
 EXPOSE 9000
 
-CMD ["/usr/sbin/php-fpm7.3", "-F"]
+ENTRYPOINT ["/usr/sbin/php-fpm7.3", "-F"]
