@@ -16,8 +16,9 @@ mariadb -u root -e "DROP DATABASE IF EXISTS test;"
 echo Remove anonymous users
 mariadb -u root -e "DELETE FROM mysql.user WHERE User='';"
 
-echo Remove remote root access
-mariadb -u root -e "DELETE FROM mysql.user WHERE User='root' AND Host NOT IN ('localhost', '
+#echo Remove remote root access
+#mariadb -u root -e "DELETE FROM mysql.user WHERE User='root' AND Host NOT IN ('localhost', '127.0.0.1', '::1');"
+
 
 echo Creating database
 mariadb -u root -e "CREATE DATABASE ${MYSQL_NAME}"
