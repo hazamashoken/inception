@@ -27,4 +27,4 @@ RUN curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli
 
 EXPOSE 9000
 
-ENTRYPOINT ["/usr/local/bin/create_wordpress.sh ;", "/usr/sbin/php-fpm7.3", "-F"]
+ENTRYPOINT ["/usr/local/bin/create_wordpress.sh", ";", "/usr/sbin/php-fpm7.3", "-F"]
