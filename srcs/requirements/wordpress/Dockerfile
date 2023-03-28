@@ -6,7 +6,7 @@ RUN apt-get update && \
 	libpng-dev \
 	libjpeg-dev \
 	libfreetype6-dev \
-	wget \
+	curl \
 	unzip \
 	php-fpm \
 	php-mysql \
