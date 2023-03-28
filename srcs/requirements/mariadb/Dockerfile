@@ -6,8 +6,7 @@ RUN apt-get update && \
 	mariadb-client \
 	&& rm -rf /var/lib/apt/list/*
 
-RUN adduser mysql && \
-	chown -R mysql:mysql /var/lib/mysql
+RUN adduser mysql
 
 COPY ./tools/create_mariadb.sh /usr/local/bin/
 
