@@ -48,7 +48,7 @@ volumes:
       type: none
       device: /home/${USER}/data/mysql
       o: bind
-  wordpress_data:
+  wordpress_db:
     driver: local
     driver_opts:
       type: none
