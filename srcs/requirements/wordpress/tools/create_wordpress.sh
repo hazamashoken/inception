@@ -1,6 +1,8 @@
 #!/bin/bash
 echo Checking if wordpress ins installed
 if [ -f "/var/www/html/index.php" ]
+then
+	echo Wordpress is already installed
 	exit 0
 fi
 
