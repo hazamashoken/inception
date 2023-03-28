@@ -4,7 +4,7 @@ services:
     container_name: nginx
     image: nginx
     build:
-      context: ./requirement/nginx
+      context: ./requirements/nginx
     restart: always
     ports:
       - "443:443"
@@ -17,7 +17,7 @@ services:
     image: wordpress
     container_name: wordpress
     build:
-      context: ./requirement/wordpress
+      context: ./requirements/wordpress
     restart: always
     volumes:
       - wordpress_files:/var/www/html
@@ -32,7 +32,7 @@ services:
     image: mariadb
     container_name: mariadb
     build:
-      context: ./requirement/mariadb
+      context: ./requirements/mariadb
     restart: always
     volumes:
       - wordpress_db:/var/lib/mysql
