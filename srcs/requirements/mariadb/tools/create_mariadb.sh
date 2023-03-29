@@ -15,7 +15,7 @@ mysql -u root -e "SELECT version();" > /dev/null 2>&1
 while [ "$?" != "0" ]
 do
 	sleep 1
-	mysql -u root -e "SELECT version();" > /dev/null 2>&1
+	mysql -u root -e "SELECT version();"
 done
 echo mysql server started
 
