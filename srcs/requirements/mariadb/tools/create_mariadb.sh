@@ -4,7 +4,7 @@ echo Setting up database ...
 rm -rf /var/lib/mysql
 mkdir -p /var/lib/mysql /var/run/mysqld
 chown -R mysql:mysql /var/lib/mysql /var/run/mysqld
-mysql_install_db --user-mysql --basedir=/usr --datadir=/var/lib/mysql
+mysql_install_db --user=mysql --basedir=/usr --datadir=/var/lib/mysql
 
 echo Running maridb server in the background ...
 mysqld -u mysql --skip-networking --initialize-insecure &
