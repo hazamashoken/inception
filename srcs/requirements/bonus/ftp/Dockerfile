@@ -8,6 +8,6 @@ RUN apt-get update; \
 COPY conf/vsftpd.conf /etc/vsftpd.conf
 
 # Clone launching file
-COPY tools/ftp_launcher.sh /tmp/ftp_launcher.sh
+COPY tools/create_ftp.sh /tmp/create_ftp.sh
 
-ENTRYPOINT sh /tmp/ftp_launcher.sh
+ENTRYPOINT sh /tmp/create_ftp.sh

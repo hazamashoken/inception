@@ -8,6 +8,6 @@ RUN apt-get update; \
 COPY conf/redis.conf /etc/redis/redis.conf
 
 # Copy redis launcher
-COPY tools/redis_launcher.sh /tmp/redis_launcher.sh
+COPY tools/create_redis.sh /tmp/create_redis.sh
 
-ENTRYPOINT sh /tmp/redis_launcher.sh
+ENTRYPOINT sh /tmp/create_redis.sh
