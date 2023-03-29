@@ -6,8 +6,7 @@ RUN apt-get update ; \
 
 
 RUN adduser mysql ; \
-	chown -R mysql:mysql /var/lib/mysql ; \
-	chmod -R mysql:mysql /var/run/mysqld
+	chown -R mysql:mysql /var/lib/mysql
 
 
 # Copy configuration file

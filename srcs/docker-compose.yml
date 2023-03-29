@@ -26,7 +26,6 @@ services:
       - redis
     volumes:
       - wordpress_files:/var/www/html
-      - wordpress_db:/var/lib/mysql
     env_file:
       - .env
     networks:
@@ -52,6 +51,8 @@ services:
     build:
       context: ./requirements/bonus/redis
     restart: always
+    volumes:
+      - wordpress_db:/var/lib/html
     env_file:
       - .env
     networks:
@@ -63,8 +64,10 @@ services:
     build:
       context: ./requirements/bonus/ftp
     restart: always
+    networks:
+      - wordpress_network
     volumes:
-      - wordpress_files:/var/www/inception
+      - wordpress_files:/var/www/html
     env_file:
       - .env
 
