@@ -9,7 +9,7 @@ RUN apt-get update && \
 RUN adduser mysql; \
 	chown -R mysql /var/lib/mysql;
 
-COPY ./tools/create_mariadb.sh /tmp/
+COPY ./tools/create_mariadb.sh /usr/local/bin/create_mariadb.sh
 COPY conf/database.conf /tmp/database.conf
 COPY conf/mariadb.conf /etc/mysql/mariadb.conf
 COPY conf/50-server.cnf /etc/mysql/mariadb.conf.d/50-server.cnf
