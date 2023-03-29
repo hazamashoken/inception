@@ -39,9 +39,9 @@ RUN mkdir -p /var/www; \
 WORKDIR /var/www/html
 
 # Copy wordpress container launcher
-COPY tools/wp_launcher.sh /tmp/wp_launcher.sh
+COPY tools/create_wordpress.sh /tmp/create_wordpress.sh
 
 # Copy html contents
 ADD contents /tmp/contents
 
-ENTRYPOINT sh /tmp/wp_launcher.sh
+ENTRYPOINT sh /tmp/create_wordpress.sh
