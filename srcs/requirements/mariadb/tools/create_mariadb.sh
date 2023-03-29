@@ -9,7 +9,7 @@ mariadb-install-db --user-mysql --basedir=/usr --datadir=/var/lib/mysql
 echo Running maridb server in the background ...
 mysqld -u mysql --skip-networking &
 mariadb_pid=$!
-echo mariadb_pid
+echo $mariadb_pid
 
 echo Remove test Database
 mariadb -u root -e "DROP DATABASE IF EXISTS test;"
@@ -38,5 +38,5 @@ mariadb -u root -e "ALTER USER 'root'@'localhost' IDENTIFIED BY '${MYSQL_ROOT_PA
 
 
 echo Killing database
-kill mariadb_pid
-wait mariadb_pid
+kill $mariadb_pid
+wait $mariadb_pid
