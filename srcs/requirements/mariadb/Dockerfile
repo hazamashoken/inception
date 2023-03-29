@@ -6,12 +6,16 @@ RUN apt-get update && \
 	mariadb-client \
 	&& rm -rf /var/lib/apt/list/*
 
-#RUN adduser mysql
+RUN adduser mysql; \
+	chown -R mysql /var/lib/mysql;
 
-COPY ./tools/create_mariadb.sh /usr/local/bin/
+COPY ./tools/create_mariadb.sh /tmp/
+COPY conf/database.conf /tmp/database.conf
+COPY conf/mariadb.conf /etc/mysql/mariadb.conf
+COPY conf/50-server.cnf /etc/mysql/mariadb.conf.d/50-server.cnf
 
 RUN chmod +x /usr/local/bin/create_mariadb.sh
 
 EXPOSE 3306
 
-ENTRYPOINT ["/usr/local/bin/create_mariadb.sh", ";", "mysqld", "-u", "mysql"]
+ENTRYPOINT ["/usr/local/bin/create_mariadb.sh"]
