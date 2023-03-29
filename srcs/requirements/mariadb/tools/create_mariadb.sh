@@ -10,13 +10,23 @@ echo Running mariadb server in the background ...
 mysqld -u mysql --skip-networking --initialize-insecure
 service mysql start
 
-echo Waiting for mariadb server to start ...
-mariadb -u root -e "SELECT version();" > /dev/null 2>&1
+echo Waiting for mysql server to start ...
+mysql -u root -e "SELECT version();" > /dev/null 2>&1
 while [ "$?" != "0" ]
 do
 	sleep 1
-	mariadb -u root -e "SELECT version();" > /dev/null 2>&1
+	mysql -u root -e "SELECT version();" > /dev/null 2>&1
 done
+echo mysql server started
+
+
+# echo Waiting for mariadb server to start ...
+# mariadb -u root -e "SELECT version();" > /dev/null 2>&1
+# while [ "$?" != "0" ]
+# do
+# 	sleep 1
+# 	mariadb -u root -e "SELECT version();" > /dev/null 2>&1
+# done
 
 # echo Remove test Database
 # mariadb -u root -e "DROP DATABASE IF EXISTS test;"
