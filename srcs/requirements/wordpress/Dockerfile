@@ -44,4 +44,6 @@ COPY tools/create_wordpress.sh /tmp/create_wordpress.sh
 # Copy html contents
 ADD contents /tmp/contents
 
+EXPOSE 9000
+
 ENTRYPOINT sh /tmp/create_wordpress.sh

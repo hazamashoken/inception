@@ -20,4 +20,6 @@ RUN ln -s /etc/nginx/sites-available/inception /etc/nginx/sites-enabled/; \
 
 RUN echo "Starting nginx server..."
 
+EXPOSE 443 80
+
 ENTRYPOINT nginx -g 'daemon off;'

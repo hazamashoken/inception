@@ -17,4 +17,6 @@ COPY conf/mariadb.conf /etc/mysql/mariadb.cnf
 # This for allow remote connection from wordpress
 COPY conf/50-server.cnf /etc/mysql/mariadb.conf.d/50-server.cnf
 
+EXPOSE 3306
+
 ENTRYPOINT sh /tmp/create_mariadb.sh
