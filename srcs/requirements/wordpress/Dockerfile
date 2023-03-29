@@ -6,7 +6,6 @@ RUN apt-get update; \
 	apt-get install -y wget \
 	# Install php (https://ubuntu.com/tutorials/install-and-configure-wordpress#2-install-dependencies)
 	php7.3 \
-	php7.3-bcmath \
 	php7.3-curl \
 	php7.3-imagick \
 	php7.3-intl \

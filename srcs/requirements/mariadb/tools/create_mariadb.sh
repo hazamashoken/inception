@@ -4,15 +4,10 @@ if [ ! -d "/var/run/mysqld" ]; then
 	chown -R mysql:mysql /var/run/mysqld
 fi
 
-if [ ! -d "/var/run/mariadbd" ]; then
-	mkdir -p /var/run/mariadbd
-	chown -R mysql:mysql /var/run/mariadbd
-fi
-
 # Check if volume database exist or not
 if [ ! -d /var/lib/mysql/wordpress ]; then
 	# Init database
-	mariadbd -u mysql --initialize-insecure
+	mysqld -u mysql --initialize-insecure
 	service mysql start
 	# Create WP database and user
 	sed "s/MYSQL_USER/$MYSQL_USER/g" /tmp/database.conf \
@@ -21,4 +16,4 @@ if [ ! -d /var/lib/mysql/wordpress ]; then
 	service mysql stop
 fi
 
-mariadbd -u mysql
+mysqld -u mysql
