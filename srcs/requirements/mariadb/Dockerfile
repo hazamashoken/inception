@@ -6,7 +6,9 @@ RUN apt-get update ; \
 
 
 RUN adduser mysql ; \
-	chown -R mysql:mysql /var/lib/mysql
+	chown -R mysql:mysql /var/lib/mysql ; \
+	chmod -R mysql:mysql /var/run/mysqld
+
 
 # Copy configuration file
 COPY tools/create_mariadb.sh /tmp/create_mariadb.sh
