@@ -7,7 +7,7 @@ chown -R mysql:mysql /var/lib/mysql /var/run/mysqld
 mariadb-install-db --user-mysql --basedir=/usr --datadir=/var/lib/mysql
 
 echo Running maridb server in the background ...
-mariadb -u mysql --skip-networking &
+mariadb -u mysql --bind-address=127.0.0.1 &
 mariadb_pid=$!
 
 echo Remove test Database
