@@ -1,5 +1,3 @@
-#!/bin/bash
-
 # Help on 1st launch with existed volume
 if [ ! -d "/var/run/mysqld" ]; then
 	mkdir -p /var/run/mysqld

@@ -1,4 +1,4 @@
-version: "3.7"
+version: "3.3"
 services:
   nginx:
     container_name: nginx
@@ -6,6 +6,8 @@ services:
     build:
       context: ./requirements/nginx
     restart: always
+    depends_on:
+      - wordpress
     ports:
       - "443:443"
     volumes:
@@ -19,11 +21,26 @@ services:
     build:
       context: ./requirements/wordpress
     restart: always
+    depends_on:
+      - mairadb
+      - redis
     volumes:
       - wordpress_files:/var/www/html
       - wordpress_db:/var/lib/mysql
-    env_file:
-      - .env
+    environment:
+      DB_HOST: ${DB_HOST}
+      DB_NAME: ${DB_NAME}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+      WP_ADMIN: ${WP_ADMIN}
+      WP_ADMIN_PASSWORD: ${WP_ADMIN_PASSWORD}
+      WP_ADMIN_EMAIL: ${WP_ADMIN_EMAIL}
+      WP_USER: ${WP_USER}
+      WP_USER_PASSWORD: ${WP_USER_PASSWORD}
+      WP_USER_EMAIL: ${WP_USER_EMAIL}
+      WP_ADDRESS: ${WP_ADDRESS}
+      WP_TITLE: ${WP_TITLE}
+      REDIS_PASS: ${REDIS_PASS}
     networks:
       - wordpress_network
       - mariadb_network
@@ -36,10 +53,36 @@ services:
     restart: always
     volumes:
       - wordpress_db:/var/lib/mysql
-    env_file:
-      - .env
+    environment:
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+      MYSQL_ROOTPASSWORD: ${MYSQL_ROOTPASSWORD}
     networks:
       - mariadb_network
+
+  redis:
+    image: redis
+    container_name: redis
+    build:
+      context: ./requirements/bonus/redis
+    restart: always
+    environment:
+      REDIS_PASS: ${REDIS_PASS}
+    networks:
+      - wordpress_network
+
+  vsftp:
+    image: vsftp
+    container_name: vsftp
+    build:
+      context: ./requirements/bonus/ftp
+    restart: always
+    volumes:
+      - wordpress_files:/var/www/inception
+    environment:
+      FTP_USER: ${FTP_USER}
+      FTP_PASS: ${FTP_PASS}
+      FTP_GROUP: ${FTP_GROUP}
 
 volumes:
   wordpress_files:
