@@ -4,11 +4,10 @@ mkdir -p /var/lib/mysql /var/run/mysqld
 ls -la /var/run/mysqld
 chown -R mysql:mysql /var/lib/mysql /var/run/mysqld
 chmod -R 755 /var/run/mysqld
-# mysql_install_db --user=mysql --basedir=/usr --datadir=/var/lib/mysql
+mysql_install_db --user=mysql --basedir=/usr --datadir=/var/lib/mysql
 
 echo Start mariadb
 mysqld -u mysql --initialize-insecure
-service mysql start
 
 echo Wait until database is ready
 mysql -u root -e "SELECT version();" > /dev/null 2>&1

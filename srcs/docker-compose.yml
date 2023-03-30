@@ -9,7 +9,8 @@ services:
     depends_on:
       - wordpress
     ports:
-      - "443:443"
+      - "8080:80"
+      - "8443:443"
     volumes:
       - wordpress_files:/var/www/html
     networks:
@@ -29,8 +30,8 @@ services:
     networks:
       - mariadb_network
       - wordpress_network
-    # ports:
-    #   - "9000:9000"
+    ports:
+      - "9000:9000"
     environment:
       DB_HOST: ${DB_HOST}
       DB_NAME: ${DB_NAME}
@@ -54,8 +55,8 @@ services:
     restart: always
     volumes:
       - wordpress_db:/var/lib/mysql
-    # ports:
-    #   - "3306:3306"
+    ports:
+      - "3306:3306"
     environment:
       DB_NAME: ${DB_NAME}
       MYSQL_USER: ${MYSQL_USER}

@@ -8,7 +8,7 @@ echo "Connected to mariadb-server"
 # Check if wordpress is already exist
 if [ ! -f wp-config.php ]; then
 	wp core download --allow-root
-	wp config create --dbhost=$MYSQL_HOST --dbname=$DB_NAME --dbuser=$MYSQL_USER --dbpass=$MYSQL_PASSWORD --allow-root
+	wp config create --dbuser=$MYSQL_USER --dbpass=$MYSQL_PASSWORD --allow-root --dbhost=$MYSQL_HOST --dbname=$DB_NAME
 	wp core install --url=$WP_ADDRESS --title=$WP_TITLE --admin_name=$WP_ADMIN --admin_password=$WP_ADMIN_PASSWORD --admin_email=$WP_ADMIN_EMAIL --skip-email --allow-root
 	wp user create $WP_USER $WP_USER_EMAIL --role=author --user_pass=$WP_USER_PASSWORD --allow-root --quiet
 	# Set up wp config for redis
@@ -24,10 +24,10 @@ if [ ! -f wp-config.php ]; then
 	# Enable redis plugin
 	# wp redis enable --allow-root --quiet
 	# Install adminer
-	wget "https://github.com/vrana/adminer/releases/download/v4.8.1/adminer-4.8.1.php" --quiet -O adminer.php
+	# wget "https://github.com/vrana/adminer/releases/download/v4.8.1/adminer-4.8.1.php" --quiet -O adminer.php
 	# Move html content
-	mv /tmp/contents /var/www/html/hello_world
-	mv /var/www/html/hello_world/index.html /var/www/html/index.html
+	# mv /tmp/contents /var/www/html/hello_world
+	# mv /var/www/html/hello_world/index.html /var/www/html/index.html
 fi
 
 chown -R www-data:www-data /var/www/html
