@@ -23,7 +23,7 @@ services:
       context: ./requirements/wordpress
     restart: always
     depends_on:
-      - mairadb
+      - mariadb
       # - redis
     volumes:
       - wordpress_files:/var/www/html
@@ -47,7 +47,7 @@ services:
       WP_TITLE: ${WP_TITLE}
       REDIS_PASS: ${REDIS_PASS}
 
-  mairadb:
+  mariadb:
     image: mariadb
     container_name: mariadb
     build:
