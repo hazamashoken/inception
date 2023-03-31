@@ -127,6 +127,12 @@ volumes:
       type: none
       device: /home/${USER}/data/wordpress
       o: bind
+  jenkin:
+    driver: local
+    driver_opts:
+      type: none
+      device: /home/${USER}/data/jenkins
+      o: bind
 
 networks:
   wordpress_network:
