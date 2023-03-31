@@ -1,38 +1,37 @@
-FROM debian:buster
+FROM alpine:3.16
 
 # Install wordpress dependencies
-RUN apt-get update; \
-	# Install wget (Download wordpress-cli)
-	apt-get install -y wget \
-	# Install php (https://ubuntu.com/tutorials/install-and-configure-wordpress#2-install-dependencies)
-	php7.3 \
-	php7.3-curl \
-	php7.3-imagick \
-	php7.3-intl \
-	php7.3-json \
-	php7.3-mbstring \
-	php7.3-mysql \
-	php7.3-xml \
-	php7.3-zip \
-	php7.3-fpm \
-	# Install mariadb-client use to connect to db server
-	mariadb-client
-	# Install redis client
-	# redis
+RUN apk update && \
+	apk add php8 php-phar php8-fpm php8-pecl-mcrypt php8-soap php8-openssl \
+    php8-gmp php8-pdo_odbc php8-json php8-dom php8-pdo php8-zip php8-mysqli \
+    php8-sqlite3 php8-apcu php8-pdo_pgsql php8-bcmath php8-gd php8-odbc \
+    php8-pdo_mysql php8-pdo_sqlite php8-gettext php8-xmlreader php8-xml \
+    php8-bz2 php8-iconv php8-pdo_dblib php8-curl php8-ctype php8-session \
+    mariadb-client
+
+
+RUN rm -rf  /etc/php8/php-fpm.d/*
 
 # Copy php-fpm.conf (Emergency restart & log level)
-COPY conf/php-fpm.conf /etc/php/7.3/fpm/php-fpm.conf
+# COPY conf/php-fpm.conf /etc/php/8/fpm/php-fpm.conf
 # Copy www.conf (Listen to port 9000) to container
-COPY conf/www.conf /etc/php/7.3/fpm/pool.d/www.conf
-
+COPY conf/www.conf /etc/php8/php-fpm.d/default.conf
 # Download && install wordpress cli
 RUN wget https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar; \
 	chmod +x wp-cli.phar; \
 	mv wp-cli.phar /usr/local/bin/wp
 
 # Create wordpress directory if it doesn't exist yet
-RUN mkdir -p /var/www; \
+RUN mkdir -p /var/www && \
 	mkdir -p /var/www/html
+
+RUN adduser -H -D 'www' && \
+	addgroup 'www' www-data
+
+	# adduser www-data && \
+
+	# usermod -aG www-data www-data && \
+	# chown -R www-data:www-data /var/www/html
 
 # Change working directory to wordpress directory
 WORKDIR /var/www/html
@@ -41,8 +40,8 @@ WORKDIR /var/www/html
 COPY tools/create_wordpress.sh /tmp/create_wordpress.sh
 
 # Copy html contents
-ADD contents /tmp/contents
+ADD contents/* /var/www/html/
 
 EXPOSE 9000
 
-ENTRYPOINT sh /tmp/create_wordpress.sh
+ENTRYPOINT sh /tmp/create_wordpress.sh ; php-fpm8 -F

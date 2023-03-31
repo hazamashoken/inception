@@ -2,6 +2,7 @@ FROM debian:buster
 
 # Install ftp acl
 RUN apt-get update; \
+	apt-get -y upgrade && \
 	apt-get install -y vsftpd acl
 
 # Setting configuration in container

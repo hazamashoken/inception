@@ -20,9 +20,9 @@ clean:
 	docker volume rm $$(docker volume ls -q);
 
 fclean: clean
-	sudo rm -rf $(HOME)/wordpress/*
-	sudo rm -rf $(HOME)/mariadb/*
-	sudo rm -rf $(HOME)/jenkin/*
+	sudo rm -rf $(HOME)/data/wordpress;
+	sudo rm -rf $(HOME)/data/mariadb;
+	sudo rm -rf $(HOME)/data/jenkin;
 
 build: create_mount_dir
 	cd srcs && docker-compose build --no-cache
