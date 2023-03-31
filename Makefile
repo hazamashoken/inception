@@ -11,7 +11,7 @@ down:
 
 create_mount_dir:
 	mkdir -p $(HOME)/data
-	mkdir -p $(HOME)/data/wordpress && mkdir -p $(HOME)/data/mariadb && mkdir -p $(HOME)/data/jenkin
+	mkdir -p $(HOME)/data/wordpress && mkdir -p $(HOME)/data/mariadb
 
 clean:
 	docker stop $$(docker ps -qa);\
@@ -22,7 +22,6 @@ clean:
 fclean: clean
 	sudo rm -rf $(HOME)/data/wordpress;
 	sudo rm -rf $(HOME)/data/mariadb;
-	sudo rm -rf $(HOME)/data/jenkin;
 
 build: create_mount_dir
 	cd srcs && docker-compose build --no-cache

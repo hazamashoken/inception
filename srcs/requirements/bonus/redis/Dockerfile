@@ -1,9 +1,8 @@
-FROM debian:buster
+FROM alpine:3.16
 
 # Install ftp acl
-RUN apt-get update; \
-	apt-get -y upgrade && \
-	apt-get install -y redis-server
+RUN apk update && \
+	apk add redis
 
 # Copy redis config
 COPY conf/redis.conf /etc/redis/redis.conf

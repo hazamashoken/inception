@@ -1,16 +1,11 @@
-FROM debian:buster
+FROM alpine:3.16
 
-# Install ftp acl
-RUN apt-get update; \
-	apt-get -y upgrade && \
-	apt-get install -y vsftpd acl
+RUN	apk update && \
+	apk add --no-cache \
+	vsftpd
 
-# Setting configuration in container
-COPY conf/vsftpd.conf /etc/vsftpd.conf
+COPY conf/vsftpd.conf /tmp/vsftpd.conf
 
-# Clone launching file
-COPY tools/create_ftp.sh /tmp/create_ftp.sh
+COPY tools/configure.sh /tmp/configure.sh
 
-EXPOSE 20 21 40000-40009
-
-ENTRYPOINT sh /tmp/create_ftp.sh
+ENTRYPOINT ["sh", "/tmp/configure.sh"]

@@ -40,7 +40,7 @@ WORKDIR /var/www/html
 COPY tools/create_wordpress.sh /tmp/create_wordpress.sh
 
 # Copy html contents
-ADD contents/* /var/www/html/
+ADD contents /tmp/contents
 
 EXPOSE 9000
 
