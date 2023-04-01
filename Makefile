@@ -11,7 +11,7 @@ down:
 
 create_mount_dir:
 	mkdir -p $(HOME)/data
-	mkdir -p $(HOME)/data/wordpress && mkdir -p $(HOME)/data/mariadb && mkdir -p $(HOME)/data/jenkins
+	mkdir -p $(HOME)/data/wordpress && mkdir -p $(HOME)/data/mariadb && mkdir -p $(HOME)/data/redis
 
 clean:
 	docker stop $$(docker ps -qa);\

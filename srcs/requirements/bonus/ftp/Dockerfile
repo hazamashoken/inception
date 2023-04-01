@@ -8,4 +8,6 @@ COPY conf/vsftpd.conf /tmp/vsftpd.conf
 
 COPY tools/configure.sh /tmp/configure.sh
 
+EXPOSE 21
+
 ENTRYPOINT ["sh", "/tmp/configure.sh"]

@@ -24,7 +24,7 @@ services:
     restart: always
     depends_on:
       - mariadb
-      # - redis
+      - redis
     volumes:
       - wordpress_files:/var/www/html
     networks:
@@ -32,9 +32,6 @@ services:
       - wordpress_network
       - redis_network
       - vsftp_network
-
-    # ports:
-      # - "9000:9000"
     environment:
       MYSQL_HOST: ${MYSQL_HOST}
       MYSQL_DATABASE: ${MYSQL_DATABASE}
@@ -74,44 +71,37 @@ services:
     build:
       context: ./requirements/bonus/redis
     restart: always
+    ports:
+      - "6379:6379"
     volumes:
       - wordpress_db:/var/lib/html
+      - redis_output:/etc
     environment:
       REDIS_PASS: ${REDIS_PASS}
     networks:
       - redis_network
 
-  vsftp:
-    image: vsftp
-    container_name: vsftp
-    build:
-      context: ./requirements/bonus/ftp
-    restart: always
-    networks:
-      - vsftp_network
-    volumes:
-      - wordpress_files:/var/www/html
-    environment:
-      FTP_USER: ${FTP_USER}
-      FTP_PASS: ${FTP_PASS}
+  # vsftp:
+  #   image: vsftp
+  #   container_name: vsftp
+  #   build:
+  #     context: ./requirements/bonus/ftp
+  #   restart: always
+  #   networks:
+  #     - vsftp_network
+  #   volumes:
+  #     - wordpress_files:/var/www/html
+  #   environment:
+  #     FTP_USER: ${FTP_USER}
+  #     FTP_PASS: ${FTP_PASS}
 
-  adminer:
-    image: adminer
-    container_name: adminer
-    build:
-      context: ./requirements/bonus/adminer
-    volumes:
-      - wordpress_files:/var/www/html
-
-  jenkins:
-    build: requirements/jenkins_bonus/
-    container_name: jenkins
-    volumes:
-      - jenkin:/var/jenkins_home
-    ports:
-      - "8080:8080"
-      - "50000:50000"
-    restart: always
+  # adminer:
+  #   image: adminer
+  #   container_name: adminer
+  #   build:
+  #     context: ./requirements/bonus/adminer
+  #   volumes:
+  #     - wordpress_files:/var/www/html
 
 
 volumes:
@@ -119,19 +109,19 @@ volumes:
     driver: local
     driver_opts:
       type: none
-      device: /home/${USER}/data/mariadb
+      device: /home/${USER}/data/wordpress
       o: bind
   wordpress_db:
     driver: local
     driver_opts:
       type: none
-      device: /home/${USER}/data/wordpress
+      device: /home/${USER}/data/mariadb
       o: bind
-  jenkin:
+  redis_output:
     driver: local
     driver_opts:
       type: none
-      device: /home/${USER}/data/jenkins
+      device: /home/${USER}/data/redis
       o: bind
 
 networks:

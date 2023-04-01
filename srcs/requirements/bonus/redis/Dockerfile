@@ -1,14 +1,12 @@
 FROM alpine:3.16
 
-# Install ftp acl
-RUN apk update && \
-	apk add redis
+RUN apk add --no-cache redis
 
-# Copy redis config
-COPY conf/redis.conf /etc/redis/redis.conf
+RUN mkdir -p /etc/redis
 
-# Copy redis launcher
-COPY tools/create_redis.sh /tmp/create_redis.sh
+COPY conf/redis.conf /etc/redis/
+
+COPY tools/create_redis.sh /tmp/
 
 EXPOSE 6379
 
