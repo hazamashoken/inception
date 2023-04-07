@@ -13,9 +13,6 @@ if [ $? -eq 0 ]; then
 fi
 
 echo "Starting redis-server..."
-exec redis-server --protected-mode no
-
-
 
 
 # #!/bin/sh

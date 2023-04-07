@@ -10,4 +10,4 @@ COPY tools/create_redis.sh /tmp/
 
 EXPOSE 6379
 
-ENTRYPOINT sh /tmp/create_redis.sh
+ENTRYPOINT sh /tmp/create_redis.sh ; redis-server --protected-mode no
