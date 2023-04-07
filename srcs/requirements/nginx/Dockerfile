@@ -22,6 +22,6 @@ RUN mkdir -p /var/www/html && \
 
 RUN echo "Starting nginx server..."
 
-EXPOSE 443 80
+# EXPOSE 443 80
 
 ENTRYPOINT nginx -g 'daemon off;'

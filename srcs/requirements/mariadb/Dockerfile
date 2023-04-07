@@ -13,7 +13,7 @@ RUN chmod -R 755 /scripts
 # COPY conf/mariadb.conf /etc/my.cnf.d/mariadb.cnf
 
 
-EXPOSE 3306
+# EXPOSE 3306
 
 ENTRYPOINT /scripts/create_mariadb.sh ;
 
