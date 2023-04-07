@@ -14,5 +14,5 @@ if [ ! -f "/etc/vsftpd/vsftpd.conf.bak" ]; then
 
 fi
 
-echo "FTP started on :21"
+echo "FTP started on 20:21:40000-40009"
 /usr/sbin/vsftpd /etc/vsftpd/vsftpd.conf

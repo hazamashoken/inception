@@ -18,4 +18,3 @@ EXPOSE 3306
 ENTRYPOINT /scripts/create_mariadb.sh ;
 
 RUN echo "Starting mariadb server..."
-
