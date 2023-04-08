@@ -26,6 +26,9 @@ fclean: clean
 build: create_mount_dir
 	cd srcs && docker-compose build --no-cache
 
+console:
+	docker exec -it $1 sh
+
 re: fclean build up
 
-.PHONY: all up debug down create_mount_dir clean fclean build re
+.PHONY: all up debug down create_mount_dir clean fclean build re console

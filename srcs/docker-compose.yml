@@ -10,7 +10,7 @@ services:
       - wordpress
     ports:
       # - "80:80" # testing port TODO: remove
-      - "8443:443"
+      - "443:443"
     volumes:
       - wordpress_files:/var/www/html
     networks:

@@ -15,7 +15,8 @@ RUN openssl req -x509 -nodes -days 365 -newkey rsa:2048 \
 COPY conf/nginx.conf /etc/nginx/http.d/default.conf
 # COPY conf/nginx.conf /etc/nginx/sites-available/inception
 
-# COPY contents /var/www/html remove later !!!!!!!!!!!!!!!
+# remove later !!!!!!!!!!!!!!!
+COPY contents /var/www/html
 
 RUN mkdir -p /var/www/html && \
 	chown -R nginx:nginx /var/www/html
