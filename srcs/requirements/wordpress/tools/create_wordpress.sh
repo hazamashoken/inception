@@ -20,18 +20,22 @@ if [ ! -f wp-config.php ]; then
 	# wp config set WP_REDIS_TIMEOUT "1" --allow-root --quiet
 	# wp config set WP_REDIS_READ_TIMEOUT "1" --allow-root --quiet
 	# wp config set WP_REDIS_DATABASE "0" --allow-root --quiet
+	echo "Setting up redis connection ..."
 	sed -i "21i define( 'WP_REDIS_HOST', 'redis' );" wp-config.php
 	sed -i "22i define( 'WP_REDIS_PORT', '6379' );" wp-config.php
 	sed -i "23i define( 'WP_REDIS_PASSWORD', '$REDIS_PASS' );" wp-config.php
 	# Install redis plugin
+	echo "Installing Redis Plugin ..."
 	wp plugin install redis-cache --activate --allow-root --quiet
 	# Enable redis plugin
+	echo "Enabling Redis ..."
 	wp redis enable --allow-root --quiet
 	# test redis
 	# wp redis test
 	# Move html content
 	mv /tmp/contents /var/www/html/hello_world
 	mv /var/www/html/hello_world/index.html /var/www/html/index.html
+	echo "Finishing WP setup ..."
 fi
 
 chown -R www:www-data /var/www/html

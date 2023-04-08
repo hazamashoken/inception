@@ -9,8 +9,8 @@ services:
     depends_on:
       - wordpress
     ports:
-      - "80:80" # testing port TODO: remove
-      - "443:443"
+      # - "80:80" # testing port TODO: remove
+      - "8443:443"
     volumes:
       - wordpress_files:/var/www/html
     networks:
@@ -85,27 +85,27 @@ services:
     networks:
       - redis_network
 
-  # vsftp:
-  #   image: vsftp
-  #   container_name: vsftp
-  #   build:
-  #     context: ./requirements/bonus/ftp
-  #   restart: always
-  #   networks:
-  #     - vsftp_network
-  #   volumes:
-  #     - wordpress_files:/var/www/html
-  #   environment:
-  #     FTP_USER: ${FTP_USER}
-  #     FTP_PASS: ${FTP_PASS}
+  vsftp:
+    image: vsftp
+    container_name: vsftp
+    build:
+      context: ./requirements/bonus/ftp
+    restart: always
+    networks:
+      - vsftp_network
+    volumes:
+      - wordpress_files:/var/www/html
+    environment:
+      FTP_USER: ${FTP_USER}
+      FTP_PASS: ${FTP_PASS}
 
-  # adminer:
-  #   image: adminer
-  #   container_name: adminer
-  #   build:
-  #     context: ./requirements/bonus/adminer
-  #   volumes:
-  #     - wordpress_files:/var/www/html
+  adminer:
+    image: adminer
+    container_name: adminer
+    build:
+      context: ./requirements/bonus/adminer
+    volumes:
+      - wordpress_files:/var/www/html
 
 
 volumes:
