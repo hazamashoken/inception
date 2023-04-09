@@ -9,7 +9,6 @@ services:
     depends_on:
       - wordpress
     ports:
-      # - "80:80" # testing port TODO: remove
       - "443:443"
     volumes:
       - wordpress_files:/var/www/html
@@ -25,8 +24,6 @@ services:
     depends_on:
       - mariadb
       - redis
-    expose:
-      - '9000'
     volumes:
       - wordpress_files:/var/www/html
     networks:
@@ -57,8 +54,6 @@ services:
     restart: always
     volumes:
       - wordpress_db:/var/lib/mysql
-    expose:
-      - '3306'
     environment:
       MYSQL_DATABASE: ${MYSQL_DATABASE}
       MYSQL_USER: ${MYSQL_USER}
@@ -73,10 +68,6 @@ services:
     build:
       context: ./requirements/bonus/redis
     restart: always
-    ports:
-      - '6379:6379'
-    expose:
-      - '6379'
     volumes:
       - wordpress_db:/var/lib/html
       - redis_output:/etc
@@ -91,6 +82,10 @@ services:
     build:
       context: ./requirements/bonus/ftp
     restart: always
+    ports:
+      - "20:20"
+      - "21:21"
+      - "13450-13500:13450-13500"
     networks:
       - vsftp_network
     volumes:
@@ -107,6 +102,15 @@ services:
     volumes:
       - wordpress_files:/var/www/html
 
+  prometheus:
+    image: prometheus
+    container_name: prometheus
+    ports:
+      - '9090:9090'
+    expose:
+      - '9090'
+    build:
+      context: ./requirements/bonus/prometheus
 
 volumes:
   wordpress_files:

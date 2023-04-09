@@ -7,8 +7,6 @@ RUN mkdir -p /etc/redis
 
 COPY conf/redis.conf /etc/redis/
 
-COPY tools/create_redis.sh /tmp/
-
-# EXPOSE 6379
+EXPOSE 6379
 
 ENTRYPOINT redis-server --protected-mode no
