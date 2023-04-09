@@ -8,8 +8,8 @@ ADD tools/create_mariadb.sh /scripts/create_mariadb.sh
 
 RUN chmod -R 755 /scripts
 
-ENTRYPOINT /scripts/create_mariadb.sh ;
-
 EXPOSE 3306
 
 RUN echo "Starting mariadb server..."
+
+ENTRYPOINT /scripts/create_mariadb.sh ; exec /usr/bin/mysqld --user=mysql --console --skip-name-resolve --skip-networking=0
